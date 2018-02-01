@@ -1,0 +1,12 @@
+<span style="font-size: 20px">NEU!Für eingetragene Gäste von Kulturleben-Berlin besteht nun jeden <br>******** im Zeitraum von 18 - 21 Uhr erstmals die Möglichkeit aus einer Liste kommender Veranstaltungen online Karten zu buchen.</span>
+
+
+
+
+public function show($id){
+        $post=Post::findOrFail($id);
+        return view('posts.show',compact('post'));
+    }
+
+
+    Route::get('/posts/{id}','Postcontroller@show');
