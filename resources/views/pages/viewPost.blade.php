@@ -90,6 +90,27 @@
             text-align: center;}
         #titel{
             color: #000;
+            font-size: 20px;
+        }
+        /*#kontent{*/
+            /**/
+        /*}*/
+        #kontent p{
+            font-size: 15px;
+        }
+        #kontent div{
+            font-size: 12px;
+            border: 1px solid;
+        }
+        #kategorie{
+            font-size: 15px;
+        }
+        .caption{
+            width: 100%;
+            border: 1px solid;
+        }
+        #new-comment{
+            width: 100%;
         }
 
 
@@ -117,7 +138,38 @@
 </section>
 
 <h1 id="titel"> Titel: {{$post->titel}}</h1> <br>
-<span>Kontent: {{$post->content}}</span> <br>
-<p> Kategorie: {{$post->categorie}}</p> <br>
+<div id="kontent">
+<p>Kontent:</p>
+<div>{{$post->content}}</div> <br>
+</div>
+<br>
+<span id="kategorie"> Kategorie: {{$post->categorie}}</span> <br>
+<div id="kommentaere">
+    <p>Kommentäre:</p>
+{{--<p>{{var_dump($post->id)}}</p>--}}
+@foreach($comments as $comments)
+        <div class="thumbnail"><br>
+            <div class="caption">
+                 {{$comments->comment}}
+                {{--<p>{{var_dump($comments)}}</p>--}}
+            </div>
+        </div>
+    </div>
+
+@endforeach
+</div> <br>
+
+{{--<p>{{var_dump($comments)}}</p>--}}
+<form method="post" action="postingcomment">
+    <textarea id="new-comment" name="comments" id="" cols="30" rows="10"></textarea><br>
+
+    <input type="hidden" name="post_id" value="{{$post->id}}">
+    <input type="hidden" name="_token" value="{{csrf_token()}}">
+    <input name="submit" type="submit" value="submit"><br>
+</form>
+
+
+
+
 </body>
 </html>

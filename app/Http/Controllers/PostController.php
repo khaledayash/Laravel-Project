@@ -44,7 +44,8 @@ class PostController extends Controller
          $userId=$request->input('userId');
          $checked=$request->input('checked');
          // SQL Injuctions
-         DB::insert('insert into posts(titel, content, categorie,comments,clicked,checked,user_id) values(?,?,?,?,?,?,?)',[$titel,$content,$categorie,$comments,$clicked,true,$userId]);
+         DB::insert('insert into posts(titel, content, categorie,comments) values(?,?,?,?)',[$titel,$content,$categorie,$comments]);
+
 
 
      //   return $request->input('titel');
@@ -56,6 +57,27 @@ class PostController extends Controller
 
 
        // return "works";
+        return view('pages.successpost');
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeComments(Request $request)
+    {
+
+        $comments = $request->input('comments');
+        $post_id = $request->input('post_id');
+        // SQL Injuctions
+
+
+        // SQL Injuctions
+        DB::insert('insert into comments(comment,id_post, user_id) values(?,?,?)',[$comments, $post_id, 1]);
+
         return view('pages.successpost');
 
     }
@@ -147,9 +169,22 @@ class PostController extends Controller
         $post=Post::findOrFail($id);
 //        $titel=Post::findOrFail($titel);
        // echo $post->titel;
+
+
+//            var_dump($post);
+
+
+            global $id_post;
+            $id_post= $post->id;
+
+            $id=$post->id;
             $titel=$post->titel;
             $content=$post->content;
-            return view('pages.viewPost',compact('post'));
+            $comments = DB::select('select * from posts join comments on comments.id_post = posts.id where posts.id = ?',[$id]);
+
+//            var_dump($comments);
+
+            return view('pages.viewPost',compact('post','comments'));
     }
 //    public function show($id){
 //        $post=Post::findOrFail($id);

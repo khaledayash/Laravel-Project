@@ -130,3 +130,5 @@ Route::get('/newpost','Postcontroller@newPost');
 Route::get('/categories','Postcontroller@categories');
 Route::post('/posting','PostController@store');
 Route::get('/posting','PostController@posting');
+
+Route::post('/posts/postingcomment','PostController@storeComments');

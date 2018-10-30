@@ -17,11 +17,8 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('titel');
             $table->longText('content');
-            $table->string('categorie');
-            $table->string('comments');
-            $table->integer('clicked');
-            $table->boolean('checked');
-            $table->integer('user_id')->unsigned();
+            $table->string('categorie')->nullable();
+            $table->string('comments')->nullable();
             $table->timestamps();
         });
     }

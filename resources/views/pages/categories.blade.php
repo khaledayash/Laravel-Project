@@ -111,7 +111,7 @@
             <div class="nav-tabs">
                 <ul class="navigator">
                     <li><a href="{{url ('startseite') }}">Home</a></li>
-                    <li><a href="{{url ('categories') }}">zum Forum</a></li>
+                    <li><a href="{{url ('startseite') }}">zum Forum</a></li>
                     <li><a href="{{url ('posting') }}">Neuer Beitrag</a></li>
                 </ul>
             </div>
